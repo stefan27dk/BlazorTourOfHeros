@@ -1,0 +1,26 @@
+﻿@using BlazorTourOfHeros.Shared
+
+
+@if (selectedHero != null)
+{
+
+
+    <h2>@selectedHero.Name.ToUpper() Details</h2>
+    <div><span>id: </span>@selectedHero.Id</div>
+    <div><span>name: </span>@selectedHero.Name</div>
+
+
+    <div>
+        <label>
+            name:
+            <input @bind="selectedHero.Name" placeholder="name" />
+        </label>
+    </div>
+
+}
+
+
+@code {
+    [Parameter]
+    public Hero selectedHero { get; set; }
+}

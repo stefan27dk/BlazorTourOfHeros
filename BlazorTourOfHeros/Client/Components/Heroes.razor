@@ -1,0 +1,57 @@
+﻿@using BlazorTourOfHeros.Shared
+@inject IHeroService client
+@inject IMessagingService messagingService;
+
+
+
+@if (heroes == null)
+{
+    <p><em>Loading.....</em></p>
+}
+else
+{
+
+    <h2>My Heroes</h2>
+    <ul class="heroes">
+        @foreach (var hero in heroes)
+        {
+            <li @onclick="@(()=> OnSelect(hero))" 
+                class="@((hero == selectedHero ? "selected" : ""))">
+                <span class="badge">@hero.Id</span> @hero.Name
+            </li>
+        }
+    </ul>
+
+}
+
+  
+
+
+
+<HeroDetail selectedHero="@selectedHero"></HeroDetail>
+
+
+
+
+@code
+{
+    Hero selectedHero;
+
+    private Hero[] heroes;
+
+    // Get Array of Heroes
+    protected override async Task OnInitializedAsync()
+    {
+        heroes = await client.GetHeroes();   // Using the Service which we created
+    }
+
+
+    private async Task OnSelect(Hero hero)
+    {
+        selectedHero = hero;
+        await messagingService.Add($"Hero selected {hero.Name}");
+    }
+}
+
+ 
+      
