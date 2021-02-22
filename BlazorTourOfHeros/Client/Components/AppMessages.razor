@@ -2,12 +2,20 @@
 
 
 <h2>Messages</h2>
+
+
+<!-- Clear Messages Button -->
 <button class="clear" @onclick="ClearMessages">Clear</button>
 
-@foreach(var message in Messages)
+
+
+<!-- Display messages -->
+@foreach (var message in Messages)
 {
     <div> @message</div>
 }
+
+
 
 
 
@@ -15,27 +23,36 @@
 
     private List<string> Messages;
 
+
+
+    <!-- ON - Initialized -->
     protected override void OnInitialized()
     {
         Messages = messagingService.Get();
-        messagingService.OnMessagesChanged += MessageChanged;
+        messagingService.OnMessagesChanged += MessageChanged;    
     }
+
+
 
 
     private async void MessageChanged(object sender, List<string> NewMessages)
     {
         await InvokeAsync(() =>
         {
-            // Set the local counter variable
-            Messages = NewMessages;
+        // Set the local counter variable
+        Messages = NewMessages;
 
 
-            // Tell Blazor to rewrite the DOM
-            StateHasChanged();
+        // Tell Blazor to rewrite the DOM
+        StateHasChanged();
         });
 
     }
 
+
+
+
+    <!-- Clear Messages Method -->
     async private void ClearMessages()
     {
         await messagingService.Clear();

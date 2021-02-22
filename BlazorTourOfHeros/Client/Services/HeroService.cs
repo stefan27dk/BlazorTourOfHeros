@@ -10,7 +10,7 @@ namespace BlazorTourOfHeros.Client.Services
 {
     public class HeroService : IHeroService
     {
-        private readonly HttpClient Http;
+        private readonly HttpClient Http;   // Http Client
         private readonly IMessagingService messagingService;
 
         public HeroService(HttpClient client, IMessagingService MessagingService)
@@ -23,7 +23,7 @@ namespace BlazorTourOfHeros.Client.Services
         // Get Heroes
         public async Task<Hero[]> GetHeroes()
         {
-            await messagingService.Add("Heroes Service: Heroes Fetched");
+            await messagingService.Add("Heroes Service: Heroes Fetched"); // Add this txt to the messaginService every time we get heroes
             return await Http.GetFromJsonAsync<Hero[]>("Hero");
         }
     }

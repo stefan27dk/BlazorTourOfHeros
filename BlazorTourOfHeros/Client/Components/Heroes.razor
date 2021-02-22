@@ -9,8 +9,7 @@
     <p><em>Loading.....</em></p>
 }
 else
-{
-
+{   
     <h2>My Heroes</h2>
     <ul class="heroes">
         @foreach (var hero in heroes)
@@ -33,10 +32,10 @@ else
 
 
 
+
 @code
 {
-    Hero selectedHero;
-
+    Hero selectedHero;  
     private Hero[] heroes;
 
     // Get Array of Heroes

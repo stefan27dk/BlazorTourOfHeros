@@ -13,6 +13,6 @@ namespace BlazorTourOfHeros.Client.Services
 
         List<string> Get();
 
-        event EventHandler<List<string>> OnMessagesChanged;
+        event EventHandler<List<string>> OnMessagesChanged;  // Event Handler
     }
 }
